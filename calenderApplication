@@ -1,0 +1,48 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+public class CalendarApplication {
+
+    public static void main(String[] args) {
+        // Get the user input for month and year
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the month (1-12): ");
+        int month = scanner.nextInt();
+
+        System.out.print("Enter the year: ");
+        int year = scanner.nextInt();
+
+        // Create a Gregorian calendar for the specified year and month
+        GregorianCalendar gregorianCalendar = new GregorianCalendar(year, month - 1, 1);
+
+        // Calculate the first day of the month
+        int firstDay = gregorianCalendar.get(Calendar.DAY_OF_WEEK);
+
+        // Calculate the number of days in the month
+        int numDays = gregorianCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        // Print the calendar header
+        System.out.println("--------------------------------------------------");
+        System.out.println("\t\t\t" + month + " - " + year);
+        System.out.println("--------------------------------------------------");
+
+        // Print the days of the week
+        System.out.print("Sun\tMon\tTue\tWed\tThu\tFri\tSat");
+        System.out.println();
+
+        // Print the calendar days
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                int day = (i * 7) + j + 1 - firstDay;
+
+                if (day <= 0 || day > numDays) {
+                    System.out.print("\t");
+                } else {
+                    System.out.print(day + "\t");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
